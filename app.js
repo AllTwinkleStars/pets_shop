@@ -75,7 +75,12 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const clothesRouter = require("./routes/api/clothes.js");
-const DB_HOST = require("./config");
+// const DB_HOST = require("./config");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const { DB_HOST } = process.env;
 
 mongoose
   .connect(DB_HOST)
