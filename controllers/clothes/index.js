@@ -3,5 +3,15 @@ const getById = require("./getById");
 const add = require("./add");
 const updateById = require("./updateById");
 const removeById = require("./removeById");
+const updateStatusById = require("./updateStatusById");
+const addFiles = require("./addFiles");
 
-module.exports = { getAll, getById, add, updateById, removeById };
+module.exports = {
+  getAll,
+  add,
+  getById,
+  updateById,
+  removeById,
+  updateStatusById,
+  addFiles,
+};

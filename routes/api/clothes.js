@@ -1,10 +1,12 @@
 const express = require("express");
-
-const { validation, ctrlWrapper } = require("../../middlewares");
-const { clothesSchema } = require("../../controllers");
+const {
+  validation,
+  authAdmin,
+  ctrlWrapper,
+  upload,
+} = require("../../middlewares");
+const { joiSchema, statusJoiSchema } = require("../../models/clothes");
 const { clothes: ctrl } = require("../../controllers");
-
-const validateMiddleware = validation(clothesSchema);
 
 const router = express.Router();
 
@@ -12,10 +14,35 @@ router.get("/", ctrlWrapper(ctrl.getAll));
 
 router.get("/:clothesId", ctrlWrapper(ctrl.getById));
 
-router.post("/", validateMiddleware, ctrlWrapper(ctrl.add));
+router.post(
+  "/",
 
-router.put("/:clothesId", validateMiddleware, ctrlWrapper(ctrl.updateById));
+  authAdmin,
+  validation(joiSchema),
+  ctrlWrapper(ctrl.add)
+);
 
-router.delete("/:clothesId", ctrlWrapper(ctrl.removeById));
+router.post(
+  "/files",
+  authAdmin,
+  upload.single("image"),
+  ctrlWrapper(ctrl.addFiles)
+);
+
+router.put(
+  "/:clothesId",
+  authAdmin,
+  validation(joiSchema),
+  ctrlWrapper(ctrl.updateById)
+);
+
+router.patch(
+  "/:clothesId/status",
+  authAdmin,
+  validation(statusJoiSchema),
+  ctrlWrapper(ctrl.updateStatusById)
+);
+
+router.delete("/:clothesId", authAdmin, ctrlWrapper(ctrl.removeById));
 
 module.exports = router;

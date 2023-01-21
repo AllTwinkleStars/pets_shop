@@ -1,10 +1,12 @@
-const clothesOperations = require("../../models/clothes");
 const createError = require("http-errors");
+const { Cloth } = require("../../models");
 
 const getById = async (req, res) => {
   //   try {
   const { clothesId } = req.params;
-  const result = await clothesOperations.getClothesById(clothesId);
+  // const result = await Cloth.findOne({ _id: clothesId });
+  const result = await Cloth.findById(clothesId);
+  console.log(result);
   if (!result) {
     throw createError(404, `Product with id=${clothesId} not found`);
   }
