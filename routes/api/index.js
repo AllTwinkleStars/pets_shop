@@ -3,4 +3,9 @@ const clothesRouter = require("./clothes");
 const usersRouter = require("./users");
 const adminRouter = require("./admin");
 
-module.exports = { authRouter, clothesRouter, usersRouter, adminRouter };
+module.exports = {
+  authRouter,
+  clothesRouter,
+  usersRouter,
+  adminRouter,
+};

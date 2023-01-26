@@ -7,8 +7,11 @@ const {
 } = require("../../middlewares");
 const { joiSchema, statusJoiSchema } = require("../../models/clothes");
 const { clothes: ctrl } = require("../../controllers");
-
+// const { uploadImage } = require("../../controller/upload.controller");
+// const { upload } = require("../../service/upload.service");
 const router = express.Router();
+
+// router.post("/file", authAdmin, uploadCLoud.single("image"), uploadImage);
 
 router.get("/", ctrlWrapper(ctrl.getAll));
 
@@ -21,6 +24,8 @@ router.post(
   validation(joiSchema),
   ctrlWrapper(ctrl.add)
 );
+
+// router.post("/file", upload.single("image"), ctrlWrapper(uploadImage));
 
 router.post(
   "/files",
