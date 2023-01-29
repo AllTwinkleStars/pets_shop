@@ -1,7 +1,8 @@
 const { ErrorHandler } = require("../../utils/errorHandler");
-const cloudinary = require("cloudinary");
 const { Cloth } = require("../../models");
 const uploadImg = require("./uploadImg");
+const { destroyToCloudinary } = require("../../service/upload.service");
+const createError = require("http-errors");
 
 const updateImg = async (req, res, next) => {
   try {
@@ -11,7 +12,11 @@ const updateImg = async (req, res, next) => {
     const result = await Cloth.findByIdAndUpdate(clothesId, { image });
 
     // const result = await Cloth.findOne({ _id: clothesId });
-    cloudinary.v2.uploader.destroy(result.image.public_id);
+    if (!result) {
+      throw createError(404, `Product with id=${clothesId} not found`);
+    }
+
+    await destroyToCloudinary(result.image.public_id);
 
     res.json({
       status: "success",

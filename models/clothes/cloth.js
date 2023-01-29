@@ -12,6 +12,13 @@ const clothesSchema = Schema(
       minlength: 2,
       maxlength: 50,
     },
+    code: {
+      type: String,
+      required: true,
+      unique: true,
+      match: codeRegexp,
+      // регулярные выражения выучить
+    },
     price: {
       type: Number,
       required: [true, "price must be exist"],
@@ -51,13 +58,6 @@ const clothesSchema = Schema(
       ],
     },
 
-    code: {
-      type: String,
-      required: true,
-      unique: true,
-      match: codeRegexp,
-      // регулярные выражения выучить
-    },
     owner: {
       type: SchemaTypes.ObjectId,
       ref: "admin",

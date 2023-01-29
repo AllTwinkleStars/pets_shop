@@ -3,19 +3,17 @@ const {
   validation,
   authAdmin,
   ctrlWrapper,
-  upload,
+  // upload,
 } = require("../../middlewares");
 // const { upload } = require("../../service/upload.service");
 const { joiSchema, statusJoiSchema } = require("../../models/clothes");
 const { clothes: ctrl } = require("../../controllers");
-// const { uploadImage } = require("../../controller/upload.controller");
-// const { upload } = require("../../service/upload.service");
 const router = express.Router();
 
-const { uploadImage } = require("../../controllers/clothes/upload.controller");
-const { upload: service } = require("../../service/upload.service");
+// const { uploadImage } = require("../../controllers/clothes/upload.controller");
+const { upload } = require("../../service/upload.service");
 
-// const { updateImg } = require("../../controllers/clothes/updateImg");
+const { updateImg } = require("../../controllers/clothes/updateImg");
 
 // router.post("/", authAdmin, upload.single("image"), uploadImage);
 
@@ -25,36 +23,34 @@ router.get("/", ctrlWrapper(ctrl.getAll));
 
 router.get("/:clothesId", ctrlWrapper(ctrl.getById));
 
-// router.post(
-//   "/",
-
-//   authAdmin,
-//   validation(joiSchema),
-//   ctrlWrapper(ctrl.add)
-// );
-
 router.post(
   "/",
   authAdmin,
-  service.single("image"),
+  upload.single("image"),
   validation(joiSchema),
-
-  uploadImage
+  ctrlWrapper(ctrl.add)
 );
 
 // router.post("/file", upload.single("image"), ctrlWrapper(uploadImage));
 
-router.post(
-  "/files",
+// router.post(
+//   "/files",
+//   authAdmin,
+//   upload.single("image"),
+//   ctrlWrapper(ctrl.addFiles)
+// );
+
+router.patch(
+  "/:clothesId/img",
   authAdmin,
   upload.single("image"),
-  ctrlWrapper(ctrl.addFiles)
+  ctrlWrapper(updateImg)
 );
-
 router.put(
   "/:clothesId",
   authAdmin,
-  // validation(joiSchema),
+  upload.single("image"),
+  validation(joiSchema),
   ctrlWrapper(ctrl.updateById)
 );
 

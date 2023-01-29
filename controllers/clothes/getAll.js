@@ -14,10 +14,12 @@ const getAll = async (req, res) => {
     skip,
     limit: Number(limit),
   }).populate("owner", "_id name email");
+  const cat = clothes.filter((item) => item.status === "cat");
+  const dog = clothes.filter((item) => item.status === "dog");
   res.json({
     status: "success",
     code: 200,
-    data: { result: clothes },
+    data: { cat, dog },
   });
 };
 

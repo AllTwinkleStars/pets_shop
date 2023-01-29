@@ -81,10 +81,13 @@ const {
   adminRouter,
   // uploadRouter,
 } = require("./routes/api");
-const uploadRouter = require("./routes/api/upload");
+
 // const DB_HOST = require("./config")
 
 require("dotenv").config();
+// require("dotenv").config({
+//   path: "./controllers/clothes/add.js",
+// });
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -95,9 +98,9 @@ app.use(express.static("public"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/clothes", clothesRouter);
+
 app.use("/api/admin", adminRouter);
-app.use("/api/upload", uploadRouter);
+app.use("/api/clothes", clothesRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
