@@ -89,6 +89,28 @@ const joiSchema = Joi.object().keys({
   status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
   image: Joi.object().required(),
+  model: Joi.string()
+    .valid(
+      "overall",
+      "vest",
+      "blanket",
+      "jacket",
+      "suit",
+      "skinny",
+      "bomber",
+      "sweatshirt",
+      "trousers",
+      "hats",
+      "scarves",
+      "tShirt",
+      "singlet",
+      "shirt",
+      "embroidery",
+      "dress",
+      "skirt",
+      "briefs"
+    )
+    .required(),
 });
 
 // image: Joi.array().items(Joi.any()),
