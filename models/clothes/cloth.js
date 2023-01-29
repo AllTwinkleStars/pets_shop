@@ -24,9 +24,33 @@ const clothesSchema = Schema(
     },
     status: {
       type: String,
-      enum: ["basic", "sale", "stock"],
-      default: "basic",
+      enum: ["dog", "cat"],
+      required: true,
     },
+    model: {
+      type: String,
+      enum: [
+        "overall",
+        "vest",
+        "blanket",
+        "jacket",
+        "suit",
+        "skinny",
+        "bomber",
+        "sweatshirt",
+        "trousers",
+        "hats",
+        "scarves",
+        "tShirt",
+        "singlet",
+        "shirt",
+        "embroidery",
+        "dress",
+        "skirt",
+        "briefs",
+      ],
+    },
+
     code: {
       type: String,
       required: true,
@@ -39,21 +63,37 @@ const clothesSchema = Schema(
       ref: "admin",
       required: true,
     },
+    image: {
+      type: Object,
+      required: true,
+    },
   },
 
   { versionKey: false, timestamps: true }
 );
 
-const joiSchema = Joi.object({
+// const joiSchema = Joi.object({
+//   name: Joi.string().required(),
+//   price: Joi.number().min(0.01).required(),
+//   active: Joi.bool(),
+//   status: Joi.string().valid("cat", "dog").required(),
+//   code: Joi.string().pattern(codeRegexp).required(),
+//   image: Joi.object().required(),
+//   // image: Joi.array().items(Joi.any()),
+// });
+
+const joiSchema = Joi.object().keys({
   name: Joi.string().required(),
   price: Joi.number().min(0.01).required(),
   active: Joi.bool(),
-  status: Joi.string().valid("basic", "sale", "stock"),
+  status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
+  image: Joi.object().required(),
 });
 
+// image: Joi.array().items(Joi.any()),
 const statusJoiSchema = Joi.object({
-  status: Joi.string().valid("basic", "sale", "stock").required(),
+  status: Joi.string().valid("cat", "dog").required(),
 });
 
 const Cloth = model("clothes", clothesSchema);

@@ -16,7 +16,7 @@ const upload = multer({
 
 const uploadToCloudinary = async (fileString, format) => {
   try {
-    const { uploader } = cloudinary;
+    const { uploader } = cloudinary.v2;
 
     const res = await uploader.upload(
       `data:image/${format};base64,${fileString}`
@@ -28,7 +28,18 @@ const uploadToCloudinary = async (fileString, format) => {
   }
 };
 
+const explicitToCloudinary = async (id, options) => {
+  try {
+    const { uploader } = cloudinary.v2;
+    const res = await uploader.explicit(id, options);
+    return res;
+  } catch (error) {
+    throw new ErrorHandler(500, error);
+  }
+};
+
 module.exports = {
   upload,
   uploadToCloudinary,
+  explicitToCloudinary,
 };
