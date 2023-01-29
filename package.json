@@ -2,7 +2,7 @@
   "name": "pets-shop-nextjs-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./bin/server.js",
     "dev": "cross-env NODE_ENV=development nodemon ./bin/server.js",
