@@ -19,21 +19,29 @@ const clothesSchema = Schema(
       match: codeRegexp,
       // регулярные выражения выучить
     },
+    optprice: {
+      type: Number,
+      required: [true, "price must be exist"],
+      min: 0.01,
+    },
     price: {
       type: Number,
       required: [true, "price must be exist"],
       min: 0.01,
     },
-
+    rating: {
+      type: Number,
+      enum: [1, 2, 3, 4, 5],
+    },
     active: {
       type: Boolean,
       default: true,
     },
-    status: {
-      type: String,
-      enum: ["dog", "cat"],
-      required: true,
-    },
+    // status: {
+    //   type: String,
+    //   enum: ["dog", "cat"],
+    //   required: true,
+    // },
     model: {
       type: String,
       enum: [
@@ -60,7 +68,7 @@ const clothesSchema = Schema(
 
     owner: {
       type: SchemaTypes.ObjectId,
-      ref: "admin",
+      ref: "user",
       required: true,
     },
     image: {
@@ -85,8 +93,9 @@ const clothesSchema = Schema(
 const joiSchema = Joi.object().keys({
   name: Joi.string().required(),
   price: Joi.number().min(0.01).required(),
+  optprice: Joi.number().min(0.01).required(),
   active: Joi.bool(),
-  status: Joi.string().valid("cat", "dog").required(),
+  // status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
   image: Joi.object().required(),
   model: Joi.string()
@@ -114,10 +123,7 @@ const joiSchema = Joi.object().keys({
 });
 
 // image: Joi.array().items(Joi.any()),
-const statusJoiSchema = Joi.object({
-  status: Joi.string().valid("cat", "dog").required(),
-});
 
 const Cloth = model("clothes", clothesSchema);
 
-module.exports = { Cloth, joiSchema, statusJoiSchema };
+module.exports = { Cloth, joiSchema };

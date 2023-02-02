@@ -12,7 +12,11 @@ const usersSchema = Schema(
       unique: true,
       // math:
     },
-
+    user: {
+      type: String,
+      enum: ["user", "admin", "wholesaler"],
+      default: "user",
+    },
     password: { type: String, required: true, minlength: 6 },
     token: {
       type: String,
@@ -34,6 +38,7 @@ const joiSignUpSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
+  user: Joi.string().valid("user", "admin", "wholesaler"),
 });
 
 const joiLoginSchema = Joi.object({

@@ -13,7 +13,7 @@ const add = async (req, res, next) => {
   try {
     const { file, body } = req;
     console.log(file);
-    const { _id } = req.admin;
+    const { _id } = req.user;
     const { code: uniq } = body;
     // const image = await uploadImg(file);
     const clothes = await Cloth.findOne({ code: uniq });

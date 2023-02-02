@@ -1,13 +1,15 @@
-const { User, Admin } = require("../../models");
+const {
+  User,
+
+} = require("../../models");
 const { Conflict } = require("http-errors");
 // const bcrypt = require("bcrypt");
 
 const signup = async (req, res) => {
-  const { name, email, password } = req.body;
-  const user = await Admin.findOne({ email });
-  const admin = await User.findOne({ email });
+  const { name, email, password, user } = req.body;
+  const utilizer = await User.findOne({ email });
 
-  if (user || admin) {
+  if (utilizer) {
     throw new Conflict(`User with ${email} already exist`);
   }
   // const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -17,7 +19,7 @@ const signup = async (req, res) => {
   //   password: hashPassword,
   // });\
 
-  const newUser = new User({ name, email });
+  const newUser = new User({ name, email, user });
 
   newUser.setPassword(password);
   await newUser.save();

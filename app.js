@@ -77,8 +77,9 @@ const cors = require("cors");
 const {
   clothesRouter,
   authRouter,
-  usersRouter,
-  adminRouter,
+  // usersRouter,
+  // adminRouter,
+  commentRouter,
   // uploadRouter,
 } = require("./routes/api");
 
@@ -97,10 +98,10 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/api/auth", authRouter);
-app.use("/api/users", usersRouter);
-
-app.use("/api/admin", adminRouter);
+// app.use("/api/users", usersRouter);
+// app.use("/api/admin", adminRouter);
 app.use("/api/clothes", clothesRouter);
+app.use("/api/comments", commentRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
