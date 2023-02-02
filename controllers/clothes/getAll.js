@@ -15,14 +15,10 @@ const getAll = async (req, res) => {
     limit: Number(limit),
   }).populate("owner", "_id name email");
 
-  console.log(clothes);
-
-  const newArray = clothes.map(({ optprice, ...other }) => other);
-
   res.json({
     status: "success",
     code: 200,
-    data: { newArray },
+    data: { clothes },
   });
 };
 
