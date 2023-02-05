@@ -3,33 +3,38 @@ const { Unauthorized } = require("http-errors");
 // const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const { ErrorHandler } = require("../../utils/errorHandler");
 
 const { JWT_KEY } = process.env;
 
-const login = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
 
-  if (!user || !user.comparePassword(password)) {
-    throw new Unauthorized("Email or password is wrong ");
+    if (!user || !user.comparePassword(password)) {
+      throw new Unauthorized("Email or password is wrong ");
+    }
+
+    const payload = {
+      id: user._id,
+    };
+
+    const token = jwt.sign(payload, JWT_KEY, { expiresIn: "1h" });
+
+    await User.findByIdAndUpdate(user._id, { token });
+
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        token,
+        user: { name: user.name, email: user.email },
+      },
+    });
+  } catch (error) {
+    next(new ErrorHandler(error.statusCode || 500, error.message));
   }
-
-  const payload = {
-    id: user._id,
-  };
-
-  const token = jwt.sign(payload, JWT_KEY, { expiresIn: "1h" });
-
-  await User.findByIdAndUpdate(user._id, { token });
-
-  res.json({
-    status: "success",
-    code: 200,
-    data: {
-      token,
-      user: { name: user.name, email: user.email },
-    },
-  });
 };
 
 module.exports = login;
