@@ -1,5 +1,5 @@
 const { User } = require("../../models");
-const { Unauthorized } = require("http-errors");
+// const { Unauthorized } = require("http-errors");
 const createError = require("http-errors");
 // const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -28,10 +28,8 @@ const login = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
-    data: {
-      token,
-      user: { name: user.name, email: user.email },
-    },
+    token,
+    user: { name: user.name, email: user.email, type: user.user },
   });
   // } catch (error) {
   //   next(new ErrorHandler(error.statusCode || 500, error.message));
