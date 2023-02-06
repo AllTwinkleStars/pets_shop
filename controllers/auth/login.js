@@ -1,5 +1,6 @@
 const { User } = require("../../models");
 const { Unauthorized } = require("http-errors");
+const createError = require("http-errors");
 // const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -7,13 +8,13 @@ require("dotenv").config();
 
 const { JWT_KEY } = process.env;
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   // try {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
   if (!user || !user.comparePassword(password)) {
-    throw new Unauthorized("Email or password is wrong ");
+    throw createError(401, "Email or password is wrong ");
   }
 
   const payload = {
