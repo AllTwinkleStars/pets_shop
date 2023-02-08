@@ -22,15 +22,17 @@ const login = async (req, res) => {
   };
 
   const token = jwt.sign(payload, JWT_KEY, { expiresIn: "1h" });
+  if (token) {
+    await User.findByIdAndUpdate(user._id, { token });
 
-  await User.findByIdAndUpdate(user._id, { token });
-
-  res.json({
-    status: "success",
-    code: 200,
-    token,
-    user: { name: user.name, email: user.email, type: user.user },
-  });
+    res.json({
+      status: "success",
+      code: 200,
+      token,
+      user: { name: user.name, email: user.email, type: user.user },
+    });
+  }
+  res.status(401).json({ message: "Email or password is wrong" });
   // } catch (error) {
   //   next(new ErrorHandler(error.statusCode || 500, error.message));
   // }
