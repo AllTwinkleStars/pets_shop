@@ -19,16 +19,51 @@ const clothesSchema = Schema(
       match: codeRegexp,
       // регулярные выражения выучить
     },
-    optprice: {
-      type: Number,
-      required: [true, "price must be exist"],
-      min: 0.01,
-    },
+    // optprice: {
+    //   type: Number,
+    //   required: [true, "price must be exist"],
+    //   min: 0.01,
+    // },
     price: {
-      type: Number,
+      type: Object,
       required: [true, "price must be exist"],
-      min: 0.01,
+      xs: {
+        type: Object,
+        // required: [true, "price must be exist"],
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
+      s: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
+      m: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
+      l: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
+      xl: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
     },
+    // price: {
+    //   type: Number,
+    //   required: [true, "price must be exist"],
+    //   min: 0.01,
+    // },
     rating: {
       type: Number,
       enum: [1, 2, 3, 4, 5],
@@ -37,11 +72,7 @@ const clothesSchema = Schema(
       type: Boolean,
       default: true,
     },
-    // status: {
-    //   type: String,
-    //   enum: ["dog", "cat"],
-    //   required: true,
-    // },
+
     model: {
       type: String,
       enum: [
@@ -92,8 +123,9 @@ const clothesSchema = Schema(
 
 const joiSchema = Joi.object().keys({
   name: Joi.string().required(),
-  price: Joi.number().min(0.01).required(),
-  optprice: Joi.number().min(0.01).required(),
+  // price: Joi.number().min(0.01).required(),
+  // optprice: Joi.number().min(0.01).required(),
+  price: Joi.object().required(),
   active: Joi.bool(),
   // status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
