@@ -24,7 +24,7 @@ const clothesSchema = Schema(
     //   required: [true, "price must be exist"],
     //   min: 0.01,
     // },
-    price: {
+    allprice: {
       type: Object,
       required: [true, "price must be exist"],
       xs: {
