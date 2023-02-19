@@ -102,10 +102,10 @@ const clothesSchema = Schema(
       ref: "user",
       required: true,
     },
-    image: {
-      type: Object,
-      required: true,
-    },
+    // image: {
+    //   type: Object,
+    //   required: true,
+    // },
   },
 
   { versionKey: false, timestamps: true }
@@ -129,7 +129,7 @@ const joiSchema = Joi.object().keys({
   active: Joi.bool(),
   // status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
-  image: Joi.object().required(),
+  // image: Joi.object().required(),
   model: Joi.string()
     .valid(
       "overall",
