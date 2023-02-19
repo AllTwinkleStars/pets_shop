@@ -104,7 +104,7 @@ const clothesSchema = Schema(
     },
     image: {
       // type: Object,
-      required: true,
+      // required: true,
     },
   },
 
