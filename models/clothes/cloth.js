@@ -24,7 +24,7 @@ const clothesSchema = Schema(
     //   required: [true, "price must be exist"],
     //   min: 0.01,
     // },
-    allprice: {
+    price: {
       type: Object,
       required: [true, "price must be exist"],
       xs: {
@@ -102,10 +102,10 @@ const clothesSchema = Schema(
       ref: "user",
       required: true,
     },
-    // image: {
-    //   type: Object,
-    //   required: true,
-    // },
+    image: {
+      type: Object,
+      required: true,
+    },
   },
 
   { versionKey: false, timestamps: true }
@@ -125,11 +125,11 @@ const joiSchema = Joi.object().keys({
   name: Joi.string().required(),
   // price: Joi.number().min(0.01).required(),
   // optprice: Joi.number().min(0.01).required(),
-  allprice: Joi.object().required(),
+  price: Joi.object().required(),
   active: Joi.bool(),
   // status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
-  // image: Joi.object().required(),
+  image: Joi.object().required(),
   model: Joi.string()
     .valid(
       "overall",
