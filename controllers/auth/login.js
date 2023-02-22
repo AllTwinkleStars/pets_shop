@@ -29,7 +29,7 @@ const login = async (req, res) => {
       status: "success",
       code: 200,
       token,
-      user: { name: user.name, email: user.email, type: user.user },
+      user: { name: user.name, email: user.email, user: user.user },
     });
   }
   res.status(401).json({ message: "Email or password is wrong" });
