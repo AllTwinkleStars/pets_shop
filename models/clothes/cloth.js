@@ -76,6 +76,36 @@ const clothesSchema = Schema(
         optPrice: { type: Number, min: 0.01 },
         active: { type: Boolean },
       },
+      xl3: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
+      xl4: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
+      xl5: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
+      xl6: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
+      xl7: {
+        type: Object,
+        price: { type: Number, min: 0.01 },
+        optPrice: { type: Number, min: 0.01 },
+        active: { type: Boolean },
+      },
     },
     // price: {
     //   type: Number,
