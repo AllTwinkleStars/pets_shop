@@ -107,6 +107,10 @@ const clothesSchema = Schema(
         active: { type: Boolean },
       },
     },
+
+    description: {
+      type: String,
+    },
     // price: {
     //   type: Number,
     //   required: [true, "price must be exist"],
