@@ -179,6 +179,7 @@ const joiSchema = Joi.object().keys({
   // optprice: Joi.number().min(0.01).required(),
   allprice: Joi.object().required(),
   active: Joi.bool(),
+  description: Joi.string(),
   // status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
   image: Joi.required(),
