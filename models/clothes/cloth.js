@@ -122,6 +122,7 @@ const clothesSchema = Schema(
     },
     active: {
       type: Boolean,
+      required: [true, "active pls"],
     },
 
     model: {
