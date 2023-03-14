@@ -120,9 +120,9 @@ const clothesSchema = Schema(
       type: Number,
       enum: [1, 2, 3, 4, 5],
     },
-    active: {
+    forSale: {
       type: Boolean,
-      required: [true, "active pls"],
+      required: [true, "for active pls"],
     },
 
     model: {
