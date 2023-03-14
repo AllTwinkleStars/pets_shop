@@ -1,6 +1,11 @@
-const { Cloth, joiSchema, statusJoiSchema } = require("./cloth");
+const {
+  Cloth,
+  joiSchema,
+  statusJoiSchema,
+  discountSchema,
+} = require("./cloth");
 
-module.exports = { Cloth, joiSchema, statusJoiSchema };
+module.exports = { Cloth, joiSchema, statusJoiSchema, discountSchema };
 
 // const listClothes = require("./listClothes");
 // const getClothesById = require("./getClothesById");

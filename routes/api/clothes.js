@@ -6,7 +6,11 @@ const {
   // upload,
 } = require("../../middlewares");
 // const { upload } = require("../../service/upload.service");
-const { joiSchema, statusJoiSchema } = require("../../models/clothes");
+const {
+  joiSchema,
+  statusJoiSchema,
+  discountSchema,
+} = require("../../models/clothes");
 const { clothes: ctrl } = require("../../controllers");
 const router = express.Router();
 
@@ -59,6 +63,13 @@ router.patch(
   authAdmin,
   validation(statusJoiSchema),
   ctrlWrapper(ctrl.updateStatusById)
+);
+
+router.patch(
+  "/:clothesId/discount",
+  authAdmin,
+  validation(discountSchema),
+  ctrlWrapper(ctrl.updateDiscountById)
 );
 
 router.delete("/:clothesId", authAdmin, ctrlWrapper(ctrl.removeById));

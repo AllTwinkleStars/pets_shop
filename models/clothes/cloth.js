@@ -125,6 +125,11 @@ const clothesSchema = Schema(
       required: [true, "for active pls"],
     },
 
+    discount: {
+      type: Number,
+      default: 0,
+    },
+
     model: {
       type: String,
       enum: [
@@ -173,6 +178,10 @@ const clothesSchema = Schema(
 //   // image: Joi.array().items(Joi.any()),
 // });
 
+const discountSchema = Joi.object({
+  discount: Joi.number(),
+});
+
 const joiSchema = Joi.object().keys({
   name: Joi.string().required(),
   // price: Joi.number().min(0.01).required(),
@@ -211,4 +220,4 @@ const joiSchema = Joi.object().keys({
 
 const Cloth = model("clothes", clothesSchema);
 
-module.exports = { Cloth, joiSchema };
+module.exports = { Cloth, joiSchema, discountSchema };
