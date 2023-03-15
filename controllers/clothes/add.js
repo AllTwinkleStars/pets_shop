@@ -23,7 +23,7 @@ const add = async (req, res, next) => {
       throw createError(404, `Such a code already exists!`);
     }
 
-    const result = await Cloth.create({
+    const data = await Cloth.create({
       ...body,
       image: await uploadImg(file),
       owner: _id,
@@ -32,7 +32,7 @@ const add = async (req, res, next) => {
     res.json({
       status: "success",
       code: 201,
-      data: result,
+      data,
     });
   } catch (error) {
     next(new ErrorHandler(error.statusCode || 500, error.message));
