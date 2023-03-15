@@ -127,7 +127,7 @@ const clothesSchema = Schema(
 
     discount: {
       type: Number,
-      min: 1,
+      min: 0,
       default: 0,
     },
 
