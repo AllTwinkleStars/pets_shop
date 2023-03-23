@@ -12,6 +12,7 @@ const {
   discountSchema,
 } = require("../../models/clothes");
 const { clothes: ctrl } = require("../../controllers");
+const model = require("../../controllers/clothes/clothesGroup");
 const router = express.Router();
 
 // const { uploadImage } = require("../../controllers/clothes/upload.controller");
@@ -24,6 +25,23 @@ const { updateImg } = require("../../controllers/clothes/updateImg");
 // router.post("/file", authAdmin, uploadCLoud.single("image"), uploadImage);
 
 router.get("/", ctrlWrapper(ctrl.getAll));
+router.get("/blanket", ctrlWrapper(model.getBlanket));
+router.get("/bomber", ctrlWrapper(model.getBomber));
+router.get("/briefs", ctrlWrapper(model.getBriefs));
+router.get("/dress", ctrlWrapper(model.getDress));
+router.get("/hats", ctrlWrapper(model.getHats));
+router.get("/jacket", ctrlWrapper(model.getJacket));
+router.get("/overalls", ctrlWrapper(model.getOveralls));
+router.get("/scarves", ctrlWrapper(model.getScarves));
+router.get("/shirt", ctrlWrapper(model.getShirt));
+router.get("/singlet", ctrlWrapper(model.getSinglet));
+router.get("/skinny", ctrlWrapper(model.getSkinny));
+router.get("/skirt", ctrlWrapper(model.getSkirt));
+router.get("/suits", ctrlWrapper(model.getSuits));
+router.get("/sweatshirt", ctrlWrapper(model.getSweatshirt));
+router.get("/trousers", ctrlWrapper(model.getTrousers));
+router.get("/tShirt", ctrlWrapper(model.getTshirt));
+router.get("/vest", ctrlWrapper(model.getVest));
 
 router.get("/:clothesId", ctrlWrapper(ctrl.getById));
 
