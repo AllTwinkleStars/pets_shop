@@ -11,7 +11,7 @@ const getBlanket = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   const skip = (page - 1) * limit;
   const clothesAll = await Cloth.find({ model: "blanket" });
-  const blanket = await Cloth.find({ model: "blanket" }, "", {
+  const type = await Cloth.find({ model: "blanket" }, "", {
     skip,
     limit: Number(limit),
   }).populate("owner", "_id name email");
@@ -19,7 +19,7 @@ const getBlanket = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
-    blanket,
+    type,
     allElements: clothesAll.length,
   });
 };

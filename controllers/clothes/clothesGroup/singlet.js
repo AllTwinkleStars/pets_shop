@@ -11,14 +11,14 @@ const getSinglet = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   const skip = (page - 1) * limit;
   const clothesAll = await Cloth.find({ model: "singlet" });
-  const singlet = await Cloth.find({ model: "singlet" }, "", {
+  const type = await Cloth.find({ model: "singlet" }, "", {
     skip,
     limit: Number(limit),
   }).populate("owner", "_id name email");
   res.json({
     status: "success",
     code: 200,
-    singlet,
+    type,
     allElements: clothesAll.length,
   });
 };

@@ -11,7 +11,7 @@ const getScarves = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   const skip = (page - 1) * limit;
   const clothesAll = await Cloth.find({ model: "scarves" });
-  const scarves = await Cloth.find({ model: "scarves" }, "", {
+  const type = await Cloth.find({ model: "scarves" }, "", {
     skip,
     limit: Number(limit),
   }).populate("owner", "_id name email");
@@ -19,7 +19,7 @@ const getScarves = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
-    scarves,
+    type,
     allElements: clothesAll.length,
   });
 };
