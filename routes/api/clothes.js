@@ -24,7 +24,8 @@ const { updateImg } = require("../../controllers/clothes/updateImg");
 
 // router.post("/file", authAdmin, uploadCLoud.single("image"), uploadImage);
 
-router.get("/", ctrlWrapper(ctrl.getAll));
+router.get("/", ctrlWrapper(ctrl.getPage));
+router.get("/all", ctrlWrapper(ctrl.getAll));
 router.get("/blanket", ctrlWrapper(model.getBlanket));
 router.get("/bomber", ctrlWrapper(model.getBomber));
 router.get("/briefs", ctrlWrapper(model.getBriefs));

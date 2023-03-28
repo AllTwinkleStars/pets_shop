@@ -1,6 +1,6 @@
 // const clothesOperations = require("../../models/clothes");
 const { Cloth } = require("../../models");
-const getAll = async (req, res) => {
+const getPage = async (req, res) => {
   // поиск своих товаров только определенному юзеру
   // const { _id, name, email } = req.admin;
 
@@ -8,9 +8,13 @@ const getAll = async (req, res) => {
   //   "owner",
   //   "_id name email"
   // );
-
+  const { page = 1, limit = 10 } = req.query;
+  const skip = (page - 1) * limit;
   const clothesAll = await Cloth.find({});
-  const clothes = await Cloth.find({}).populate("owner", "_id name email");
+  const clothes = await Cloth.find({}, "", {
+    skip,
+    limit: Number(limit),
+  }).populate("owner", "_id name email");
 
   res.json({
     status: "success",
@@ -20,4 +24,4 @@ const getAll = async (req, res) => {
   });
 };
 
-module.exports = getAll;
+module.exports = getPage;

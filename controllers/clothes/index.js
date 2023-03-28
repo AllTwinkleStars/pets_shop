@@ -1,4 +1,4 @@
-const getAll = require("./getAll");
+const getPage = require("./getPage");
 const getById = require("./getById");
 const add = require("./add");
 const updateById = require("./updateById");
@@ -6,14 +6,16 @@ const removeById = require("./removeById");
 const updateStatusById = require("./updateStatusById");
 const addFiles = require("./addFiles");
 const updateDiscountById = require("./updateDiscountById");
+const getAll = require("./getAll");
 
 module.exports = {
   updateDiscountById,
-  getAll,
+  getPage,
   add,
   getById,
   updateById,
   removeById,
   updateStatusById,
   addFiles,
+  getAll,
 };
