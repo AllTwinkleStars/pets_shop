@@ -9,16 +9,16 @@ const sendMail = async (req, res) => {
   const mail = {
     from: "yasya.loy@gmail.com",
     subject: `Новий заказ`,
-    html: `<h2>Сумма заказа : ${summary}</h2>
+    html: clothes.map((item) => (
+      <p>
+        {item.code}- розмір :{item.allprice.size}, кол-во : {item.amount} ,
+      </p>
+    ))`<h2>Сумма заказа : ${summary}</h2>
     <p>${name} ${surname}</p>
     <p>Зв'язок : ${email} , ${phone}</p>
     <p>Місто: ${city} </p>
     <p>Відділення : ${number} </p>
-    ${clothes.map((item) => (
-      <p>
-        {item.code}- розмір :{item.allprice.size}, кол-во : {item.amount} ,
-      </p>
-    ))}
+
     `,
   };
   // поиск своих товаров только определенному юзеру
