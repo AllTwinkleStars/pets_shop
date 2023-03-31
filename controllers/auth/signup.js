@@ -1,8 +1,8 @@
 const { User } = require("../../models");
 const { Conflict } = require("http-errors");
 // const bcrypt = require("bcrypt");
-const { sendEmail } = require("../../helpers");
-const { v4: uuidv4 } = require("uuid");
+// const { sendEmail } = require("../../helpers");
+// const { v4: uuidv4 } = require("uuid");
 
 const signup = async (req, res) => {
   const { name, email, password, user } = req.body;
@@ -28,13 +28,13 @@ const signup = async (req, res) => {
 
   newUser.setPassword(password);
   await newUser.save();
-  const mail = {
-    to: email,
-    subject: "Подтверждение email",
-    html: `<a target="_blank" href:"http://localhost:3000/api/auth/verify/${verificationToken}">Подтвердить email</a>`,
-  };
+  // const mail = {
+  //   to: email,
+  //   subject: "Подтверждение email",
+  //   html: `<a target="_blank" href:"http://localhost:3000/api/auth/verify/${verificationToken}">Подтвердить email</a>`,
+  // };
 
-  await sendEmail(mail);
+  // await sendEmail(mail);
   res.status(201).json({
     status: "success",
     code: 201,
@@ -42,7 +42,7 @@ const signup = async (req, res) => {
       user: {
         email,
         name,
-        verificationToken,
+        // verificationToken,
       },
     },
   });
