@@ -18,8 +18,13 @@ const signup = async (req, res) => {
   //   password: hashPassword,
   // });\
 
-  const verificationToken = uuidv4();
-  const newUser = new User({ name, email, user, verificationToken });
+  // const verificationToken = uuidv4();
+  const newUser = new User({
+    name,
+    email,
+    user,
+    // verificationToken
+  });
 
   newUser.setPassword(password);
   await newUser.save();
