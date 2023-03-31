@@ -3,12 +3,23 @@
 const { sendEmail } = require("../../helpers");
 
 const sendMail = async (req, res) => {
-  const { text, email } = req.body;
+  const { clothes, summary, name, surname, phone, number, city, email } =
+    req.body;
 
   const mail = {
     from: "yasya.loy@gmail.com",
-    subject: `${text} ${email}`,
-    html: `<p>Новая заявка от ${email}</p>`,
+    subject: `Новий заказ`,
+    html: `<h2>Сумма заказа : ${summary}</h2>
+    <p>${name} ${surname}</p>
+    <p>Зв'язок : ${email} , ${phone}</p>
+    <p>Місто: ${city} </p>
+    <p>Відділення : ${number} </p>
+    ${clothes.map((item) => (
+      <p>
+        {item.code}- розмір :{item.allprice.size}, кол-во : {item.amount} ,
+      </p>
+    ))}
+    `,
   };
   // поиск своих товаров только определенному юзеру
   // const { _id, name, email } = req.admin;
