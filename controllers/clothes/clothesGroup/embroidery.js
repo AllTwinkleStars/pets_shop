@@ -1,6 +1,6 @@
 // const clothesOperations = require("../../models/clothes");
 const { Cloth } = require("../../../models");
-const getBroidery = async (req, res) => {
+const getEmbroidery = async (req, res) => {
   // поиск своих товаров только определенному юзеру
   // const { _id, name, email } = req.admin;
 
@@ -24,4 +24,4 @@ const getBroidery = async (req, res) => {
   });
 };
 
-module.exports = getBroidery;
+module.exports = getEmbroidery;

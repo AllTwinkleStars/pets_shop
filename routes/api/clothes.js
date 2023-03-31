@@ -43,6 +43,7 @@ router.get("/sweatshirt", ctrlWrapper(model.getSweatshirt));
 router.get("/trousers", ctrlWrapper(model.getTrousers));
 router.get("/tShirt", ctrlWrapper(model.getTshirt));
 router.get("/vest", ctrlWrapper(model.getVest));
+router.get("/embroidery", ctrlWrapper(model.getEmbroidery));
 
 router.post("/mail", ctrlWrapper(ctrl.sendMail));
 

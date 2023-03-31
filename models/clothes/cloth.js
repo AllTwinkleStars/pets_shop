@@ -152,7 +152,7 @@ const clothesSchema = Schema(
         "dress",
         "skirt",
         "briefs",
-        "broidery",
+        "embroidery",
       ],
     },
 

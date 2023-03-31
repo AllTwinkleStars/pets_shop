@@ -15,8 +15,10 @@ const getSweatshirt = require("./sweatshirt");
 const getTrousers = require("./trousers");
 const getTshirt = require("./tShirt");
 const getVest = require("./vest");
+const getEmbroidery = require("./embroidery");
 
 const model = {
+  getEmbroidery,
   getBlanket,
   getBomber,
   getBriefs,
