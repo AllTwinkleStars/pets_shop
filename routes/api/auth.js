@@ -14,6 +14,7 @@ router.get("/logout", auth, ctrlWrapper(ctrl.logout));
 
 router.get("/current", auth, ctrlWrapper(ctrl.getCurrent));
 
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
 // router.post("/signup");
 
 module.exports = router;

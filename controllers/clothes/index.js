@@ -7,6 +7,7 @@ const updateStatusById = require("./updateStatusById");
 const addFiles = require("./addFiles");
 const updateDiscountById = require("./updateDiscountById");
 const getAll = require("./getAll");
+const sendMail = require("./sendMail");
 
 module.exports = {
   updateDiscountById,
@@ -18,4 +19,5 @@ module.exports = {
   updateStatusById,
   addFiles,
   getAll,
+  sendMail,
 };

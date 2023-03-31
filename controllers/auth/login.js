@@ -13,8 +13,11 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
-  if (!user || !user.comparePassword(password)) {
-    throw createError(401, "Email or password is wrong ");
+  if (!user || !user.verify || !user.comparePassword(password)) {
+    throw createError(
+      401,
+      "Email  is wrong or not verify,  or password is wrong  "
+    );
   }
 
   const payload = {
