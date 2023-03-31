@@ -3,8 +3,17 @@
 const { sendEmail } = require("../../helpers");
 
 const sendMail = async (req, res) => {
-  const { clothes, summary, name, surname, phone, number, city, email } =
-    req.body;
+  const {
+    clothes,
+    summary,
+    name,
+    surname,
+    phone,
+    number,
+    city,
+    email,
+    service,
+  } = req.body;
 
   const mail = {
     from: "yasya.loy@gmail.com",
@@ -12,6 +21,7 @@ const sendMail = async (req, res) => {
     html: `<h2>Сумма заказа : ${summary}</h2>
     <p>${name} ${surname}</p>
     <p>Зв'язок : ${email} , ${phone}</p>
+    <p>Почта : ${service}</p>
     <p>Місто: ${city} </p>
     <p>Відділення : ${number} </p>
 ${clothes.map(
