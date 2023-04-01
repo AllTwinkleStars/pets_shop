@@ -10,8 +10,8 @@ const getEmbroidery = async (req, res) => {
   // );
   const { page = 1, limit = 10 } = req.query;
   const skip = (page - 1) * limit;
-  const clothesAll = await Cloth.find({ model: "broidery" });
-  const type = await Cloth.find({ model: "broidery" }, "", {
+  const clothesAll = await Cloth.find({ model: "embroidery" });
+  const type = await Cloth.find({ model: "embroidery" }, "", {
     skip,
     limit: Number(limit),
   }).populate("owner", "_id name email");
