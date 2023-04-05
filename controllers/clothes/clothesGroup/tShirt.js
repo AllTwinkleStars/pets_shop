@@ -11,6 +11,7 @@ const getTshirt = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   const skip = (page - 1) * limit;
   const clothesAll = await Cloth.find({ model: "tShirt" });
+  const allPage = Math.ceil(clothesAll.length / limit);
   const type = await Cloth.find({ model: "tShirt" }, "", {
     skip,
     limit: Number(limit),
@@ -20,7 +21,7 @@ const getTshirt = async (req, res) => {
     status: "success",
     code: 200,
     type,
-    allElements: clothesAll.length,
+    allPage,
   });
 };
 
