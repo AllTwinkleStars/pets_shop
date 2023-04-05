@@ -220,6 +220,10 @@ const joiSchema = Joi.object().keys({
 
 // image: Joi.array().items(Joi.any()),
 
+clothesSchema.index({
+  name: "text",
+});
+
 const Cloth = model("clothes", clothesSchema);
 
 module.exports = { Cloth, joiSchema, discountSchema };

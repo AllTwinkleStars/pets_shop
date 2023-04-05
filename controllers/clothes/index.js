@@ -8,6 +8,7 @@ const addFiles = require("./addFiles");
 const updateDiscountById = require("./updateDiscountById");
 const getAll = require("./getAll");
 const sendMail = require("./sendMail");
+const getFilter = require("./filter/getFilter");
 
 module.exports = {
   updateDiscountById,
@@ -20,4 +21,5 @@ module.exports = {
   addFiles,
   getAll,
   sendMail,
+  getFilter,
 };

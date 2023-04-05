@@ -48,6 +48,7 @@ router.get("/embroidery", ctrlWrapper(model.getEmbroidery));
 router.post("/mail", ctrlWrapper(ctrl.sendMail));
 
 router.get("/:clothesId", ctrlWrapper(ctrl.getById));
+router.post("/filter", ctrlWrapper(ctrl.getFilter));
 
 router.post(
   "/",
