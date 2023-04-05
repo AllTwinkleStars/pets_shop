@@ -7,6 +7,10 @@ const getFilter = async (req, res) => {
   const { page = 1, limit = 20 } = req.query;
   const skip = (page - 1) * limit;
 
+  const clothesAllName = await Cloth.find({
+    name: { $regex: text, $options: "i" },
+  });
+  const allPage = Math.ceil(clothesAllName.length / limit);
   const clothesName = await Cloth.find(
     {
       name: { $regex: text, $options: "i" },
@@ -17,7 +21,10 @@ const getFilter = async (req, res) => {
       limit: Number(limit),
     }
   );
-
+  const clothesAllCode = await Cloth.find({
+    code: { $regex: text, $options: "i" },
+  });
+  const allPageCode = Math.ceil(clothesAllCode.length / limit);
   const clothesCode = await Cloth.find(
     {
       code: { $regex: text, $options: "i" },
@@ -43,14 +50,15 @@ const getFilter = async (req, res) => {
   //   "_id name email"
   // );
 
-  if (!clothesName) {
+  if (!clothesAllName || !clothesCode) {
     throw createError(404, `Product ${text} not found`);
   }
 
   res.json({
     status: "success",
     code: 200,
-    data: clothesName.length === 0 ? clothesCode : clothesName,
+    data: clothesAllName.length === 0 ? clothesCode : clothesName,
+    allPage: clothesAllName.length === 0 ? allPageCode : allPage,
   });
 };
 
