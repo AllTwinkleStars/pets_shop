@@ -13,6 +13,11 @@ const commentsSchema = Schema(
       ref: "user",
       required: true,
     },
+    author: {
+      type: String,
+      ref: "user",
+      required: true,
+    },
 
     product: {
       type: SchemaTypes.ObjectId,
