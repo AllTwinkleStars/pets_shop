@@ -6,11 +6,9 @@ const add = async (req, res, next) => {
   try {
     const { body, params } = req;
     const { clothesId } = params;
-    const { _id, author } = req.user;
-    console.log(req.user);
+    const { _id, name } = req.user;
     const idCloth = await Cloth.findById(clothesId);
-    console.log(author);
-    console.log(_id);
+
     if (!idCloth) {
       throw createError(404, `Product with id=${clothesId} not found`);
     }
@@ -18,6 +16,7 @@ const add = async (req, res, next) => {
     const result = await Comment.create({
       ...body,
       authorId: _id,
+      author: name,
 
       product: clothesId,
     });
