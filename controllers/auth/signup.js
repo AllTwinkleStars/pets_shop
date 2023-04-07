@@ -44,6 +44,7 @@ const signup = async (req, res) => {
       user: {
         email,
         name,
+        lastName,
         // verificationToken,
       },
     },
