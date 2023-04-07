@@ -6,6 +6,10 @@ const bcrypt = require("bcrypt");
 const usersSchema = Schema(
   {
     name: { type: String, required: true },
+    lastName: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -44,6 +48,7 @@ usersSchema.methods.comparePassword = function (password) {
 
 const joiSignUpSchema = Joi.object({
   name: Joi.string().required(),
+  lastName: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
   user: Joi.string().valid("user", "admin", "wholesaler"),

@@ -1,5 +1,6 @@
 const { Schema, model, SchemaTypes } = require("mongoose");
 const Joi = require("joi");
+const moment = require("moment-timezone");
 
 const commentsSchema = Schema(
   {
@@ -7,6 +8,10 @@ const commentsSchema = Schema(
       type: String,
       maxlength: 300,
       required: true,
+    },
+    parentId: {
+      type: String,
+      default: "",
     },
     authorId: {
       type: SchemaTypes.ObjectId,
@@ -24,13 +29,26 @@ const commentsSchema = Schema(
       ref: "cloth",
       required: true,
     },
+
+    createdAt: {
+      type: String,
+      default: moment().tz("Ukraine/Kyiv").format(),
+    },
   },
-  { versionKey: false, timestamps: true }
+  // { versionKey: false, timestamps: true }
+  {
+    versionKey: false,
+    timestamps: {
+      createdAt: false,
+      updatedAt: true,
+    },
+  }
 );
 
 const commentsJoiSchema = Joi.object({
   text: Joi.string().max(300).required(),
 });
+// commentsSchema.createdAt(moment().tz("Ukraine/Kyiv").format());
 
 const Comment = model("comments", commentsSchema);
 
