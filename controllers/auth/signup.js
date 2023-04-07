@@ -5,7 +5,7 @@ const { Conflict } = require("http-errors");
 // const { v4: uuidv4 } = require("uuid");
 
 const signup = async (req, res) => {
-  const { name, email, password, user } = req.body;
+  const { name, lastName, email, password, user } = req.body;
   const utilizer = await User.findOne({ email });
 
   if (utilizer) {
@@ -21,8 +21,10 @@ const signup = async (req, res) => {
   // const verificationToken = uuidv4();
   const newUser = new User({
     name,
+    lastName,
     email,
     user,
+
     // verificationToken
   });
 
