@@ -12,13 +12,20 @@ const getAll = async (req, res, next) => {
   try {
     const clothesAll = await Cloth.find({});
     const clothes = await Cloth.find({}).populate("owner", "_id name email");
-
-    res.json({
-      status: "success",
-      code: 200,
-      data: { clothes },
-      allElements: clothesAll.length,
-    });
+    if (clothes && clothes) {
+      res.json({
+        status: "success",
+        code: 200,
+        data: { clothes },
+        allElements: clothesAll.length,
+      });
+    } else {
+      res.json({
+        status: "error",
+        code: 500,
+        message: "Виключи впн",
+      });
+    }
   } catch (error) {
     next(new ErrorHandler(error.statusCode || 500, error.message));
   }
