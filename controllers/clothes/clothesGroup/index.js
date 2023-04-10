@@ -16,8 +16,14 @@ const getTrousers = require("./trousers");
 const getTshirt = require("./tShirt");
 const getVest = require("./vest");
 const getEmbroidery = require("./embroidery");
+const getHoodies = require("./hoodies");
+const getCouch = require("./couch");
+const getFootwear = require("./footwear");
 
 const model = {
+  getFootwear,
+  getCouch,
+  getHoodies,
   getEmbroidery,
   getBlanket,
   getBomber,

@@ -213,7 +213,10 @@ const joiSchema = Joi.object().keys({
       "embroidery",
       "dress",
       "skirt",
-      "briefs"
+      "briefs",
+      "hoodies",
+      "footwear",
+      "couch"
     )
     .required(),
 });

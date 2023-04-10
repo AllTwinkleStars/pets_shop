@@ -6,7 +6,7 @@ const add = async (req, res, next) => {
   try {
     const { body, params } = req;
     const { clothesId } = params;
-    const { _id, name } = req.user;
+    const { _id, name, lastName } = req.user;
     const idCloth = await Cloth.findById(clothesId);
 
     if (!idCloth) {
@@ -16,7 +16,7 @@ const add = async (req, res, next) => {
     const result = await Comment.create({
       ...body,
       authorId: _id,
-      author: name,
+      author: `${name} ${lastName}`,
 
       product: clothesId,
     });
