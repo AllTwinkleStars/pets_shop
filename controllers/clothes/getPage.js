@@ -12,7 +12,7 @@ const getPage = async (req, res) => {
   const skip = (page - 1) * limit;
   const clothesAll = await Cloth.find({});
   const allPage = Math.ceil(clothesAll.length / limit);
-  const clothes = await Cloth.find({}, "", {
+  const data = await Cloth.find({}, "", {
     skip,
     limit: Number(limit),
   }).populate("owner", "_id name email");
@@ -20,7 +20,7 @@ const getPage = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
-    data: { clothes },
+    data,
     allPage,
   });
 };
