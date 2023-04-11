@@ -4,7 +4,7 @@ const { Cloth } = require("../../../models");
 const getFilter = async (req, res, next) => {
   const { text } = req.body;
   console.log(text);
-  const { page = 1, limit = 20 } = req.query;
+  const { page = 1, limit = 30 } = req.query;
   const skip = (page - 1) * limit;
   try {
     const clothesAllName = await Cloth.find({
