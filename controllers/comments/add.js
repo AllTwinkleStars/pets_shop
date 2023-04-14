@@ -6,7 +6,7 @@ const add = async (req, res, next) => {
   try {
     const { body, params } = req;
     const { clothesId } = params;
-    const { _id, name, lastName } = req.user;
+    const { _id, name, lastName, parent = null } = req.user;
     const idCloth = await Cloth.findById(clothesId);
 
     if (!idCloth) {
@@ -16,15 +16,16 @@ const add = async (req, res, next) => {
     const result = await Comment.create({
       ...body,
       authorId: _id,
-      author: `${name} ${lastName}`,
-
+      authorName: name,
+      authorLastName: lastName,
+      parent,
       product: clothesId,
     });
 
     res.json({
       status: "success",
       code: 201,
-      data: result,
+      result,
     });
   } catch (error) {
     next(new ErrorHandler(error.statusCode || 500, error.message));
