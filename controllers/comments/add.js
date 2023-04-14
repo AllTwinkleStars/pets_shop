@@ -14,7 +14,7 @@ const add = async (req, res, next) => {
     }
 
     const result = await Comment.create({
-      ...body,
+      text: body.text,
       authorId: _id,
       authorName: name,
       authorLastName: lastName,
