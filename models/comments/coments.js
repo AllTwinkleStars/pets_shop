@@ -18,7 +18,13 @@ const commentsSchema = Schema(
       ref: "user",
       required: true,
     },
-    author: {
+    authorLastName: {
+      type: String,
+      ref: "user",
+      required: true,
+    },
+
+    authorName: {
       type: String,
       ref: "user",
       required: true,
