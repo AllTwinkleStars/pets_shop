@@ -4,10 +4,9 @@ const createError = require("http-errors");
 // const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { serialize } = require("cookie");
 // const { ErrorHandler } = require("../../utils/errorHandler");
 
-const { JWT_KEY, NODE_ENV } = process.env;
+const { JWT_KEY } = process.env;
 
 const login = async (req, res) => {
   // try {
@@ -25,18 +24,10 @@ const login = async (req, res) => {
     id: user._id,
   };
 
-  const token = jwt.sign(payload, JWT_KEY, { expiresIn: 60 * 60 * 24 * 30 });
+  const token = jwt.sign(payload, JWT_KEY, { expiresIn: "1h" });
   if (token) {
     await User.findByIdAndUpdate(user._id, { token });
 
-    const serialized = serialize("token", token, {
-      httpOnly: true,
-      secure: NODE_ENV,
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 30,
-      path: "/",
-    });
-    res.setHeader("Set-Cookie", serialized);
     res.json({
       status: "success",
       code: 200,
@@ -48,7 +39,6 @@ const login = async (req, res) => {
         user: user.user,
       },
     });
-    return;
   }
   res.status(401).json({ message: "Email or password is wrong" });
   // } catch (error) {
@@ -58,56 +48,62 @@ const login = async (req, res) => {
 
 module.exports = login;
 
-// const { User, Admin } = require("../../models");
-// const { Unauthorized } = require("http-errors");
+// const { User } = require("../../models");
+// // const { Unauthorized } = require("http-errors");
+// const createError = require("http-errors");
 // // const bcrypt = require("bcrypt");
 // const jwt = require("jsonwebtoken");
 // require("dotenv").config();
+// const { serialize } = require("cookie");
+// // const { ErrorHandler } = require("../../utils/errorHandler");
 
-// const { JWT_KEY } = process.env;
+// const { JWT_KEY, NODE_ENV } = process.env;
 
 // const login = async (req, res) => {
+//   // try {
 //   const { email, password } = req.body;
 //   const user = await User.findOne({ email });
-//   const admin = await Admin.findOne({ email });
 
-//   if (
-//     (!user || !user.comparePassword(password)) &&
-//     (!admin || !admin.comparePassword(password))
-//   ) {
-//     throw new Unauthorized("Email or password is wrong ");
+//   if (!user || !user.comparePassword(password)) {
+//     throw createError(
+//       401,
+//       "Email  is wrong or not verify,  or password is wrong  "
+//     );
 //   }
-//   //   if (!user) {
-//   //     throw new Unauthorized("Email or password is wrong ");
-//   //   }
 
-//   //   const passCompare = bcrypt.compareSync(password, user.password);
-//   //   if (!passCompare) {
-//   //     throw new Unauthorized("Email or password is wrong ");
-//   //   }
-
-//   const payloadAdmin = {
-//     id: admin._id,
-//   };
-
-//   const payloadUser = {
+//   const payload = {
 //     id: user._id,
 //   };
 
-//   const token = jwt.sign(
-//     admin._id !== null ? payloadAdmin : payloadUser,
-//     JWT_KEY,
-//     {
-//       expiresIn: "1h",
-//     }
-//   );
-//   res.json({
-//     status: "success",
-//     code: 200,
-//     data: {
+//   const token = jwt.sign(payload, JWT_KEY, { expiresIn: 60 * 60 * 24 * 30 });
+//   if (token) {
+//     await User.findByIdAndUpdate(user._id, { token });
+
+//     const serialized = serialize("token", token, {
+//       httpOnly: true,
+//       secure: NODE_ENV,
+//       sameSite: "strict",
+//       maxAge: 60 * 60 * 24 * 30,
+//       path: "/",
+//     });
+//     res.setHeader("Set-Cookie", serialized);
+//     res.json({
+//       status: "success",
+//       code: 200,
 //       token,
-//     },
-//   });
+//       user: {
+//         name: user.name,
+//         lastName: user.lastName,
+//         email: user.email,
+//         user: user.user,
+//       },
+//     });
+//     return;
+//   }
+//   res.status(401).json({ message: "Email or password is wrong" });
+//   // } catch (error) {
+//   //   next(new ErrorHandler(error.statusCode || 500, error.message));
+//   // }
 // };
 
 // module.exports = login;
