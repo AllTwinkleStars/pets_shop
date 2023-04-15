@@ -10,7 +10,7 @@ const { JWT_KEY } = process.env;
 
 const login = async (req, res) => {
   // try {
-  const { email, password } = req.body;
+  const { email, password, remember } = req.body;
   const user = await User.findOne({ email });
 
   if (!user || !user.comparePassword(password)) {
@@ -24,7 +24,11 @@ const login = async (req, res) => {
     id: user._id,
   };
 
-  const token = jwt.sign(payload, JWT_KEY, { expiresIn: "1h" });
+  const token = jwt.sign(
+    payload,
+    JWT_KEY,
+    remember === true ? {} : { expiresIn: "1h" }
+  );
   if (token) {
     await User.findByIdAndUpdate(user._id, { token });
 
