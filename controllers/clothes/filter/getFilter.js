@@ -23,7 +23,7 @@ const getFilter = async (req, res, next) => {
     );
 
     const clothesAllCode = await Cloth.find({
-      code: text,
+      code: { $regex: text, $options: "i" },
     });
 
     console.log(clothesAllCode);
@@ -31,6 +31,7 @@ const getFilter = async (req, res, next) => {
     //   code: { $regex: text, $options: "i" },
     // });
     const allPageCode = Math.ceil(clothesAllCode.length / limit);
+    console.log();
     const clothesCode = await Cloth.find(
       {
         code: { $regex: text, $options: "i" },
