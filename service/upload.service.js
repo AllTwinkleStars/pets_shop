@@ -41,6 +41,7 @@ const explicitToCloudinary = async (id, options) => {
   }
 };
 const destroyToCloudinary = async (id, options) => {
+  console.log(id);
   try {
     cloudinary.v2.uploader.destroy(id, {
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

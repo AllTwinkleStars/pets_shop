@@ -101,6 +101,8 @@ app.use("/api/auth", authRouter);
 // app.use("/api/admin", adminRouter);
 app.use("/api/clothes", clothesRouter);
 app.use("/api/comments", commentRouter);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
