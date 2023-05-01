@@ -11,9 +11,9 @@ const createError = require("http-errors");
 
 const add = async (req, res, next) => {
   try {
-    const { file, body } = req;
-    console.log(file);
-    console.log(body);
+    const { files, body } = req;
+    // console.log(files);
+
     const { _id } = req.user;
     const { code: uniq } = body;
     // const image = await uploadImg(file);
@@ -23,9 +23,23 @@ const add = async (req, res, next) => {
       throw createError(404, `Such a code already exists!`);
     }
 
+    const array = [];
+
+    for (const file of files) {
+      const oneFile = await uploadImg(file);
+      // console.log(oneFile);
+      array.push({
+        url: oneFile.url,
+        public_id: oneFile.public_id,
+        secure_url: oneFile.secure_url,
+      });
+    }
+
+    // array.push(oneFile);
+
     const data = await Cloth.create({
       ...body,
-      image: await uploadImg(file),
+      image: array,
       owner: _id,
     });
 

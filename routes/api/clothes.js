@@ -56,7 +56,7 @@ router.post("/filter", ctrlWrapper(ctrl.getFilter));
 router.post(
   "/",
   authAdmin,
-  upload.single("image"),
+  upload.array("image", 3),
   validation(joiSchema),
   ctrlWrapper(ctrl.add)
 );
@@ -79,7 +79,7 @@ router.patch(
 router.put(
   "/:clothesId",
   authAdmin,
-  upload.single("image"),
+  upload.array("image", 3),
   validation(joiSchema),
   ctrlWrapper(ctrl.updateById)
 );

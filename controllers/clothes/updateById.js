@@ -7,14 +7,29 @@ const { destroyToCloudinary } = require("../../service/upload.service");
 const updateById = async (req, res, next) => {
   try {
     const { clothesId } = req.params;
-    const { file, body } = req;
+    const { files, body } = req;
 
-    const imageDestroy = await Cloth.findOne({ clothesId });
-    await destroyToCloudinary(imageDestroy.image.public_id);
-    const image = await uploadImg(file);
+    const imageDestroy = await Cloth.findById(clothesId);
+    for (const item of imageDestroy.image) {
+      await destroyToCloudinary(item.public_id);
+    }
+
+    const array = [];
+    // await destroyToCloudinary(imageDestroy.image.public_id);
+    for (const file of files) {
+      const oneFile = await uploadImg(file);
+      // console.log(oneFile);
+      array.push({
+        url: oneFile.url,
+        public_id: oneFile.public_id,
+        secure_url: oneFile.secure_url,
+      });
+    }
+
+    // const image = await uploadImg(file);
     const result = await Cloth.findByIdAndUpdate(
       clothesId,
-      { ...body, image },
+      { ...body, image: array },
       {
         new: true,
       }

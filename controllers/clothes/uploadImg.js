@@ -3,6 +3,8 @@ const { ErrorHandler } = require("../../utils/errorHandler");
 const { bufferToDataURI } = require("../../utils/file");
 
 const uploadImg = (file) => {
+  console.log(file);
+
   if (!file) throw new ErrorHandler(400, "Image is required");
 
   const fileFormat = file.mimetype.split("/")[1];

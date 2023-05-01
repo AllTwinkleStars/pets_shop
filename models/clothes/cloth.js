@@ -139,7 +139,7 @@ const clothesSchema = Schema(
         "blanket",
         "jacket",
         "suit",
-        "skinny",
+        // "skinny",
         "bomber",
         "sweatshirt",
         "trousers",
@@ -161,10 +161,16 @@ const clothesSchema = Schema(
       ref: "user",
       required: true,
     },
-    image: {
-      type: Object,
-      required: true,
-    },
+    image: [
+      {
+        type: Object,
+        required: true,
+      },
+    ],
+    // image: {
+    //   type: Object,
+    //   required: true,
+    // },
   },
 
   { versionKey: false, timestamps: true }
@@ -193,7 +199,7 @@ const joiSchema = Joi.object().keys({
   description: Joi.string(),
   // status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
-  image: Joi.required(),
+  // image: Joi.required(),
   model: Joi.string()
     .valid(
       "overall",
@@ -201,7 +207,7 @@ const joiSchema = Joi.object().keys({
       "blanket",
       "jacket",
       "suit",
-      "skinny",
+      // "skinny",
       "bomber",
       "sweatshirt",
       "trousers",

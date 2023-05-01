@@ -11,7 +11,11 @@ const removeById = async (req, res) => {
     throw createError(404, `Product with id=${clothesId} not found`);
   }
 
-  await destroyToCloudinary(data.image.public_id);
+  for (const item of data.image) {
+    console.log(item.public_id);
+    await destroyToCloudinary(item.public_id);
+  }
+  // await destroyToCloudinary(data.image.public_id);
   res.json({
     status: "success",
     code: 200,
