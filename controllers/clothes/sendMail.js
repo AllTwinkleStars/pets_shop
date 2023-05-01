@@ -4,6 +4,7 @@ const { sendEmail } = require("../../helpers");
 
 const sendMail = async (req, res) => {
   const {
+    numberOrder,
     clothes,
     summary,
     name,
@@ -18,7 +19,8 @@ const sendMail = async (req, res) => {
   const mail = {
     from: "yasya.loy@gmail.com",
     subject: `Новий заказ`,
-    html: `<h2>Сумма заказа : ${summary}</h2>
+    html: `<h1>Номер замовлення : ${numberOrder}</h1>
+    <h2>Сумма заказа : ${summary}</h2>
     <p>${name} ${surname}</p>
     <p>Зв'язок : ${email} , ${phone}</p>
     <p>Почта : ${service}</p>
