@@ -199,7 +199,7 @@ const joiSchema = Joi.object().keys({
   description: Joi.string(),
   // status: Joi.string().valid("cat", "dog").required(),
   code: Joi.string().pattern(codeRegexp).required(),
-  image: Joi.required(),
+  // image: Joi.required(),
   model: Joi.string()
     .valid(
       "overall",

@@ -11,11 +11,11 @@ const createError = require("http-errors");
 
 const add = async (req, res, next) => {
   try {
-    const { body } = req;
+    const { files, body } = req;
     // console.log(files);
 
     const { _id } = req.user;
-    const { image, code: uniq } = body;
+    const { code: uniq } = body;
     // const image = await uploadImg(file);
     const clothes = await Cloth.findOne({ code: uniq });
 
@@ -25,7 +25,7 @@ const add = async (req, res, next) => {
 
     const array = [];
 
-    for (const file of image) {
+    for (const file of files) {
       const oneFile = await uploadImg(file);
       // console.log(oneFile);
       array.push({
