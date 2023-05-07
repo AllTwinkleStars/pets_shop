@@ -11,11 +11,11 @@ const createError = require("http-errors");
 
 const add = async (req, res, next) => {
   try {
-    const { files, body } = req;
+    const { body } = req;
     // console.log(files);
 
     const { _id } = req.user;
-    const { code: uniq } = body;
+    const { image, code: uniq } = body;
     // const image = await uploadImg(file);
     const clothes = await Cloth.findOne({ code: uniq });
 
@@ -25,7 +25,7 @@ const add = async (req, res, next) => {
 
     const array = [];
 
-    for (const file of files) {
+    for (const file of image) {
       const oneFile = await uploadImg(file);
       // console.log(oneFile);
       array.push({
@@ -66,4 +66,55 @@ module.exports = add;
 //     data: { result },
 //   });
 // };
+// module.exports = add;
+
+// const { ErrorHandler } = require("../../utils/errorHandler");
+// const { Cloth } = require("../../models");
+// const uploadImg = require("./uploadImg");
+// const createError = require("http-errors");
+
+// const add = async (req, res, next) => {
+//   try {
+//     const { files, body } = req;
+//     // console.log(files);
+
+//     const { _id } = req.user;
+//     const { code: uniq } = body;
+//     // const image = await uploadImg(file);
+//     const clothes = await Cloth.findOne({ code: uniq });
+
+//     if (clothes) {
+//       throw createError(404, `Such a code already exists!`);
+//     }
+
+//     const array = [];
+
+//     for (const file of files) {
+//       const oneFile = await uploadImg(file);
+//       // console.log(oneFile);
+//       array.push({
+//         url: oneFile.url,
+//         public_id: oneFile.public_id,
+//         secure_url: oneFile.secure_url,
+//       });
+//     }
+
+//     // array.push(oneFile);
+
+//     const data = await Cloth.create({
+//       ...body,
+//       image: array,
+//       owner: _id,
+//     });
+
+//     res.json({
+//       status: "success",
+//       code: 201,
+//       data,
+//     });
+//   } catch (error) {
+//     next(new ErrorHandler(error.statusCode || 500, error.message));
+//   }
+// };
+
 // module.exports = add;
