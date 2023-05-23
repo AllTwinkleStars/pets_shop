@@ -1,22 +1,26 @@
 const createError = require("http-errors");
 const { Cloth } = require("../../models");
+const { ErrorHandler } = require("../../utils/errorHandler");
 
-const getById = async (req, res) => {
-  //   try {
-  const { clothesId } = req.params;
-  // const result = await Cloth.findOne({ _id: clothesId });
-  const result = await Cloth.findById(clothesId);
-  console.log(result);
-  if (!result) {
-    throw createError(404, `Product with id=${clothesId} not found`);
+const getById = async (req, res, next) => {
+  try {
+    const { clothesId } = req.params;
+    // const result = await Cloth.findOne({ _id: clothesId });
+    const result = await Cloth.findById(clothesId);
+    console.log(result);
+    if (!result) {
+      throw createError(404, `Product with id=${clothesId} not found`);
+    }
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        result,
+      },
+    });
+  } catch (error) {
+    next(new ErrorHandler(error.statusCode || 500, error.message));
   }
-  res.json({
-    status: "success",
-    code: 200,
-    data: {
-      result,
-    },
-  });
   // const error = new Error(`Product with id=${clothesId} not found`);
   // error.status = 404;
   // throw error;
