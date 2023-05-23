@@ -77,7 +77,7 @@ const cors = require("cors");
 const {
   clothesRouter,
   authRouter,
-
+  imagesRouter,
   // adminRouter,
   commentRouter,
   // uploadRouter,
@@ -101,6 +101,7 @@ app.use("/api/auth", authRouter);
 // app.use("/api/admin", adminRouter);
 app.use("/api/clothes", clothesRouter);
 app.use("/api/comments", commentRouter);
+app.use("/api/images", imagesRouter);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
