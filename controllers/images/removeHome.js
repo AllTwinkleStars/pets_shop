@@ -4,11 +4,11 @@ const { Image } = require("../../models");
 const { destroyToCloudinary } = require("../../service/upload.service");
 
 const removeHome = async (req, res) => {
-  const { clothesId } = req.params;
+  const { imagesId } = req.params;
   // const result = await clothesOperations.removeClothes(clothesId);
-  const data = await Image.findByIdAndRemove(clothesId);
+  const data = await Image.findByIdAndRemove(imagesId);
   if (!data) {
-    throw createError(404, `Product with id=${clothesId} not found`);
+    throw createError(404, `Product with id=${imagesId} not found`);
   }
 
   for (const item of data.images) {

@@ -14,6 +14,6 @@ router.post(
   ctrlWrapper(ctrl.addHome)
 );
 router.get("/", ctrlWrapper(ctrl.getHome));
-router.delete("/:clothesId", ctrlWrapper(ctrl.removeHome));
+router.delete("/:imagesId", authAdmin, ctrlWrapper(ctrl.removeHome));
 
 module.exports = router;
